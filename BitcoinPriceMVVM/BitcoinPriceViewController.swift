@@ -75,7 +75,6 @@ class BitcoinPriceViewController: UIViewController {
         return imageView
     }()
 
-    var exchangeRate = ["USD", "MXN", "EUR", "JPY", "BRL", "CAD"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +89,7 @@ class BitcoinPriceViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getPrice(with: exchangeRate.first ?? "USD")
+        getPrice(with: bitcoinVieModel.exchangeRate.first ?? "USD")
     }
     
     private func createBindingsWithViewModel() {
@@ -183,22 +182,22 @@ extension BitcoinPriceViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return exchangeRate.count
+        return bitcoinVieModel.exchangeRate.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return exchangeRate[row]
+        return bitcoinVieModel.exchangeRate[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //call viewModel to get the price
-        let currency = exchangeRate[row]
+        let currency = bitcoinVieModel.exchangeRate[row]
         print("selectedValue : \(currency)")
         getPrice(with: currency)
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let title = exchangeRate[row]
+        let title = bitcoinVieModel.exchangeRate[row]
         
         let color = UIColor.white
         
