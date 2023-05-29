@@ -7,8 +7,13 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
 class BitcoinPriceViewController: UIViewController {
+    
+    private let bitcoinVieModel = BitcoinViewModel(apiClient: APIClient())
+    
+    var cancellables = Set<AnyCancellable>()
     
     private let gradientLayer : CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
@@ -21,6 +26,8 @@ class BitcoinPriceViewController: UIViewController {
     private let currencyPickerView: UIPickerView = {
        let picker = UIPickerView()
         picker.layer.cornerRadius = 15
+        picker.layer.borderWidth = 1
+        picker.layer.borderColor = UIColor.white.cgColor
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
     }()
@@ -65,32 +72,39 @@ class BitcoinPriceViewController: UIViewController {
         
         createBindingsWithViewModel()
         
-        configPicker()
+        configUIElements()
         
     }
     
     private func createBindingsWithViewModel() {
+        ///Se crea un binding del viewModel hacia el labelPrice
+        bitcoinVieModel.$bitcoinPrice
+            .assign(to: \UILabel.text!, on: labelPrice)
+            .store(in: &cancellables)
         
+        ///Se crea el binding para escuchar cuando cambia el valor de $bitcoinPrice y poder actualizar la vista
+        bitcoinVieModel.$bitcoinPrice.sink { [weak self] price in
+            DispatchQueue.main.async {
+                self?.labelPrice.text = price
+            }
+        }.store(in: &cancellables)
     }
     
-    private func configPicker(){
-//        view.backgroundColor = .orange
+    private func configUIElements(){
+        
         gradientLayer.frame = view.bounds
-
         view.layer.addSublayer(gradientLayer)
         
-        [
-            currencyPickerView,
+        [currencyPickerView,
             labelTitle,
             labelPrice,
             bitcoinImage
         ].forEach(view.addSubview)
         
-        
         NSLayoutConstraint.activate([
             
             labelTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            labelTitle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            labelTitle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             labelTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             labelTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             labelTitle.heightAnchor.constraint(equalToConstant: 60),
@@ -134,8 +148,23 @@ extension BitcoinPriceViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //call viewModel to get the price
-        print(exchangeRate[row])
+        let selectedValue = exchangeRate[row]
+        print("selectedValue : \(selectedValue)")
+        bitcoinVieModel.getPrice(with: selectedValue)
     }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        let title = exchangeRate[row]
+        
+        let color = UIColor.white
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color
+        ]
+        
+        return NSAttributedString(string: title, attributes: attributes)
+    }
+
 }
 
 struct ViewControllerRepresentable: UIViewControllerRepresentable {
