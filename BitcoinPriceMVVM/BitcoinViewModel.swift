@@ -10,7 +10,7 @@ import Combine
 
 class BitcoinViewModel {
     @Published var bitcoinPrice = "0.0"
-    @Published var currency = ""
+    @Published var showLoading = false
     
     var cancellables = Set<AnyCancellable>()
     
@@ -21,14 +21,16 @@ class BitcoinViewModel {
     }
     
     func getPrice(with currency: String) {
-       
+        showLoading = true
         apiClient.getPriceBitcoin(currency: currency) { [weak self] price, error in
             guard let price = price?.rate else { return }
+            
+            let precioFormato = String(format: "%.1f", price)
+            
             DispatchQueue.main.async {
-                let precioFormato = String(format: "%.1f", price)
                 self?.bitcoinPrice = "$\(precioFormato)"
+                self?.showLoading = false
             }
-            print("price: \(price)")
         }
     }
 }

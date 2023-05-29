@@ -15,6 +15,8 @@ class BitcoinPriceViewController: UIViewController {
     
     var cancellables = Set<AnyCancellable>()
     
+    private var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     private let gradientLayer : CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
@@ -76,11 +78,28 @@ class BitcoinPriceViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        getPrice(with: exchangeRate.first ?? "USD")
+    }
+    
     private func createBindingsWithViewModel() {
         ///Se crea un binding del viewModel hacia el labelPrice
         bitcoinVieModel.$bitcoinPrice
             .assign(to: \UILabel.text!, on: labelPrice)
             .store(in: &cancellables)
+        
+        ///Se crea un binding de la propiedad showLoading para mostrar/ocultar un activity indicator
+        bitcoinVieModel.$showLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] showLoading in
+                if showLoading {
+                    self?.activityIndicator.startAnimating()
+                } else {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
+            .store(in: &cancellables)
+
         
         ///Se crea el binding para escuchar cuando cambia el valor de $bitcoinPrice y poder actualizar la vista
         bitcoinVieModel.$bitcoinPrice.sink { [weak self] price in
@@ -98,11 +117,13 @@ class BitcoinPriceViewController: UIViewController {
         [currencyPickerView,
             labelTitle,
             labelPrice,
-            bitcoinImage
+            bitcoinImage,
+            activityIndicator
         ].forEach(view.addSubview)
         
+        activityIndicator.center = view.center
+        
         NSLayoutConstraint.activate([
-            
             labelTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             labelTitle.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             labelTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -129,6 +150,10 @@ class BitcoinPriceViewController: UIViewController {
             
         ])
     }
+    
+    private func getPrice(with currency: String){
+        bitcoinVieModel.getPrice(with: currency)
+    }
 
 
 }
@@ -148,9 +173,9 @@ extension BitcoinPriceViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         //call viewModel to get the price
-        let selectedValue = exchangeRate[row]
-        print("selectedValue : \(selectedValue)")
-        bitcoinVieModel.getPrice(with: selectedValue)
+        let currency = exchangeRate[row]
+        print("selectedValue : \(currency)")
+        getPrice(with: currency)
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
