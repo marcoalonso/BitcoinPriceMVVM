@@ -11,6 +11,7 @@ import Combine
 class BitcoinViewModel {
     @Published var bitcoinPrice = "0.0"
     @Published var showLoading = false
+    @Published var dateLastPrice = ""
     
     var cancellables = Set<AnyCancellable>()
     
@@ -23,14 +24,23 @@ class BitcoinViewModel {
     func getPrice(with currency: String) {
         showLoading = true
         apiClient.getPriceBitcoin(currency: currency) { [weak self] price, error in
-            guard let price = price?.rate else { return }
+            guard let price = price else { return }
             
-            let precioFormato = String(format: "%.1f", price)
+            let precioFormato = String(format: "%.1f", price.rate)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM, yy, hh:MM:ss"
+            
+            let dateLastUpdate = dateFormatter.date(from: price.time)
+            let date = dateFormatter.string(from: dateLastUpdate ?? Date.now)
             
             DispatchQueue.main.async {
                 self?.bitcoinPrice = "$\(precioFormato)"
                 self?.showLoading = false
+                self?.dateLastPrice = date
             }
         }
     }
 }
+
+

@@ -56,6 +56,17 @@ class BitcoinPriceViewController: UIViewController {
         return label
     }()
     
+    private let labelDate : UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 25, weight: .bold, width: .standard)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var bitcoinImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bitcoin")
@@ -100,6 +111,10 @@ class BitcoinPriceViewController: UIViewController {
             }
             .store(in: &cancellables)
 
+        ///Se crea un binding de la propiedad dateLastPrice para mostrar label con la fecha
+        bitcoinVieModel.$dateLastPrice
+            .assign(to: \UILabel.text!, on: labelDate)
+            .store(in: &cancellables)
         
         ///Se crea el binding para escuchar cuando cambia el valor de $bitcoinPrice y poder actualizar la vista
         bitcoinVieModel.$bitcoinPrice.sink { [weak self] price in
@@ -117,6 +132,7 @@ class BitcoinPriceViewController: UIViewController {
         [currencyPickerView,
             labelTitle,
             labelPrice,
+            labelDate,
             bitcoinImage,
             activityIndicator
         ].forEach(view.addSubview)
@@ -135,6 +151,9 @@ class BitcoinPriceViewController: UIViewController {
             labelPrice.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             labelPrice.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             labelPrice.heightAnchor.constraint(equalToConstant: 60),
+            
+            labelDate.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelDate.topAnchor.constraint(equalTo: labelPrice.bottomAnchor, constant: 20),
             
             currencyPickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currencyPickerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
