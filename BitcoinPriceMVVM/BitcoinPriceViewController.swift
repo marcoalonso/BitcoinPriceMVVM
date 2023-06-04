@@ -67,6 +67,18 @@ class BitcoinPriceViewController: UIViewController {
         return label
     }()
     
+    private let labelError : UILabel = {
+        let label = UILabel()
+        label.text = "!Error al obtener la información!"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.isHidden = false
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 25, weight: .bold, width: .standard)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var bitcoinImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bitcoin")
@@ -89,6 +101,7 @@ class BitcoinPriceViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         getPrice(with: bitcoinVieModel.exchangeRate.first ?? "USD")
     }
     
@@ -121,6 +134,14 @@ class BitcoinPriceViewController: UIViewController {
                 self?.labelPrice.text = price
             }
         }.store(in: &cancellables)
+        
+        ///Se crea el binding para escuchar cuando cambia el valor de $errorMessage y poder actualizar la vista
+        bitcoinVieModel.$errorMessage.sink { [weak self] errorMessage in
+            DispatchQueue.main.async {
+                self?.labelError.text = errorMessage
+                self?.labelError.isHidden = false
+            }
+        }.store(in: &cancellables)
     }
     
     private func configUIElements(){
@@ -133,7 +154,8 @@ class BitcoinPriceViewController: UIViewController {
             labelPrice,
             labelDate,
             bitcoinImage,
-            activityIndicator
+            activityIndicator,
+            labelError
         ].forEach(view.addSubview)
         
         activityIndicator.center = view.center
@@ -166,10 +188,16 @@ class BitcoinPriceViewController: UIViewController {
             bitcoinImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             bitcoinImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             
+            labelError.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelError.topAnchor.constraint(equalTo: bitcoinImage.bottomAnchor, constant: 20),
+            labelError.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            labelError.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            
         ])
     }
     
     private func getPrice(with currency: String){
+        labelError.isHidden = true
         bitcoinVieModel.getPrice(with: currency)
     }
 
@@ -190,6 +218,10 @@ extension BitcoinPriceViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //Vibracion
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
+        
         //call viewModel to get the price
         let currency = bitcoinVieModel.exchangeRate[row]
         print("selectedValue : \(currency)")

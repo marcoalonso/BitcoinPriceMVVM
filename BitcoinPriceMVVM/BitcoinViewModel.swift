@@ -12,10 +12,10 @@ class BitcoinViewModel {
     @Published var bitcoinPrice = "0.0"
     @Published var showLoading = false
     @Published var dateLastPrice = ""
+    @Published var errorMessage = ""
     
     var exchangeRate = ["AUD", "BRL","CAD","CNY","EUR","GBP","HKD","IDR","ILS","INR","JPY","MXN","NOK","NZD","PLN","RON","RUB","SEK","SGD","USD","ZAR"]
     
-    var cancellables = Set<AnyCancellable>()
     
     let apiClient: APIClient
     
@@ -26,6 +26,11 @@ class BitcoinViewModel {
     func getPrice(with currency: String) {
         showLoading = true
         apiClient.getPriceBitcoin(currency: currency) { [weak self] price, error in
+            
+            if error != nil {
+                self?.errorMessage = "Error: \(error!.localizedDescription)"
+            }
+            
             guard let price = price else { return }
             
             let precioFormato = price.rate
