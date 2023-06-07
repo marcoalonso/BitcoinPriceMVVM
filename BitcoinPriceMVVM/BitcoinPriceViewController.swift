@@ -17,7 +17,7 @@ class BitcoinPriceViewController: UIViewController {
     
     private var activityIndicator = UIActivityIndicatorView(style: .large)
     
-    private let gradientLayer : CAGradientLayer = {
+    private(set) lazy var gradientLayer : CAGradientLayer = {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor.red.cgColor, UIColor.orange.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
@@ -25,7 +25,7 @@ class BitcoinPriceViewController: UIViewController {
         return gradientLayer
     }()
     
-    private let currencyPickerView: UIPickerView = {
+    private(set) lazy var currencyPickerView: UIPickerView = {
        let picker = UIPickerView()
         picker.layer.cornerRadius = 15
         picker.layer.borderWidth = 1
@@ -34,7 +34,7 @@ class BitcoinPriceViewController: UIViewController {
         return picker
     }()
     
-    private let labelTitle : UILabel = {
+    private(set) lazy var labelTitle : UILabel = {
         let label = UILabel()
         label.text = "Bitcoin Price"
         label.textAlignment = .center
@@ -45,7 +45,7 @@ class BitcoinPriceViewController: UIViewController {
         return label
     }()
     
-    private let labelPrice : UILabel = {
+    private(set) lazy var labelPrice : UILabel = {
         let label = UILabel()
         label.text = "$123456.45"
         label.textAlignment = .center
@@ -56,7 +56,7 @@ class BitcoinPriceViewController: UIViewController {
         return label
     }()
     
-    private let labelDate : UILabel = {
+     var labelDate : UILabel = {
         let label = UILabel()
         label.text = ""
         label.textAlignment = .center
@@ -146,7 +146,7 @@ class BitcoinPriceViewController: UIViewController {
     }
     
     private func configUIElements(){
-        
+        view.backgroundColor = .white
         gradientLayer.frame = view.bounds
         view.layer.addSublayer(gradientLayer)
         

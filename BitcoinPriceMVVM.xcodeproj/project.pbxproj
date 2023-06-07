@@ -10,6 +10,7 @@
 		6C113F4C2A25463A003B3C14 /* BitcoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C113F4B2A25463A003B3C14 /* BitcoinViewModel.swift */; };
 		6C113F4F2A254661003B3C14 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C113F4E2A254661003B3C14 /* Bitcoin.swift */; };
 		6C113F512A25468F003B3C14 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C113F502A25468F003B3C14 /* APIClient.swift */; };
+		6C3BB7962A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */; };
 		6CFA94AC2A251A030009BBF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AB2A251A030009BBF5 /* AppDelegate.swift */; };
 		6CFA94AE2A251A030009BBF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AD2A251A030009BBF5 /* SceneDelegate.swift */; };
 		6CFA94B02A251A030009BBF5 /* BitcoinPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AF2A251A030009BBF5 /* BitcoinPriceViewController.swift */; };
@@ -18,10 +19,22 @@
 		6CFA94B82A251A050009BBF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6CFA94B62A251A050009BBF5 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6C3BB7972A3119CC00754DE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CFA94A02A251A030009BBF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6CFA94A72A251A030009BBF5;
+			remoteInfo = BitcoinPriceMVVM;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		6C113F4B2A25463A003B3C14 /* BitcoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinViewModel.swift; sourceTree = "<group>"; };
 		6C113F4E2A254661003B3C14 /* Bitcoin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitcoin.swift; sourceTree = "<group>"; };
 		6C113F502A25468F003B3C14 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		6C3BB7932A3119CC00754DE4 /* BitcoinPriceMVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitcoinPriceMVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinPriceViewControllerTests.swift; sourceTree = "<group>"; };
 		6CFA94A82A251A030009BBF5 /* BitcoinPriceMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitcoinPriceMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CFA94AB2A251A030009BBF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CFA94AD2A251A030009BBF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,6 +46,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6C3BB7902A3119CC00754DE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CFA94A52A251A030009BBF5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -52,10 +72,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6C3BB7942A3119CC00754DE4 /* BitcoinPriceMVVMTests */ = {
+			isa = PBXGroup;
+			children = (
+				6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */,
+			);
+			path = BitcoinPriceMVVMTests;
+			sourceTree = "<group>";
+		};
 		6CFA949F2A251A030009BBF5 = {
 			isa = PBXGroup;
 			children = (
 				6CFA94AA2A251A030009BBF5 /* BitcoinPriceMVVM */,
+				6C3BB7942A3119CC00754DE4 /* BitcoinPriceMVVMTests */,
 				6CFA94A92A251A030009BBF5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				6CFA94A82A251A030009BBF5 /* BitcoinPriceMVVM.app */,
+				6C3BB7932A3119CC00754DE4 /* BitcoinPriceMVVMTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,6 +117,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6C3BB7922A3119CC00754DE4 /* BitcoinPriceMVVMTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C3BB79B2A3119CC00754DE4 /* Build configuration list for PBXNativeTarget "BitcoinPriceMVVMTests" */;
+			buildPhases = (
+				6C3BB78F2A3119CC00754DE4 /* Sources */,
+				6C3BB7902A3119CC00754DE4 /* Frameworks */,
+				6C3BB7912A3119CC00754DE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6C3BB7982A3119CC00754DE4 /* PBXTargetDependency */,
+			);
+			name = BitcoinPriceMVVMTests;
+			productName = BitcoinPriceMVVMTests;
+			productReference = 6C3BB7932A3119CC00754DE4 /* BitcoinPriceMVVMTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6CFA94A72A251A030009BBF5 /* BitcoinPriceMVVM */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6CFA94BC2A251A050009BBF5 /* Build configuration list for PBXNativeTarget "BitcoinPriceMVVM" */;
@@ -114,6 +162,10 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					6C3BB7922A3119CC00754DE4 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 6CFA94A72A251A030009BBF5;
+					};
 					6CFA94A72A251A030009BBF5 = {
 						CreatedOnToolsVersion = 14.3;
 					};
@@ -133,11 +185,19 @@
 			projectRoot = "";
 			targets = (
 				6CFA94A72A251A030009BBF5 /* BitcoinPriceMVVM */,
+				6C3BB7922A3119CC00754DE4 /* BitcoinPriceMVVMTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6C3BB7912A3119CC00754DE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CFA94A62A251A030009BBF5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -151,6 +211,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6C3BB78F2A3119CC00754DE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C3BB7962A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6CFA94A42A251A030009BBF5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +233,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6C3BB7982A3119CC00754DE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6CFA94A72A251A030009BBF5 /* BitcoinPriceMVVM */;
+			targetProxy = 6C3BB7972A3119CC00754DE4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6CFA94B12A251A030009BBF5 /* Main.storyboard */ = {
@@ -186,6 +262,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6C3BB7992A3119CC00754DE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28Z45T22J2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rotadevsolutions.BitcoinPriceMVVMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitcoinPriceMVVM.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BitcoinPriceMVVM";
+			};
+			name = Debug;
+		};
+		6C3BB79A2A3119CC00754DE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 28Z45T22J2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rotadevsolutions.BitcoinPriceMVVMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BitcoinPriceMVVM.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BitcoinPriceMVVM";
+			};
+			name = Release;
+		};
 		6CFA94BA2A251A050009BBF5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -359,6 +479,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6C3BB79B2A3119CC00754DE4 /* Build configuration list for PBXNativeTarget "BitcoinPriceMVVMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6C3BB7992A3119CC00754DE4 /* Debug */,
+				6C3BB79A2A3119CC00754DE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6CFA94A32A251A030009BBF5 /* Build configuration list for PBXProject "BitcoinPriceMVVM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
