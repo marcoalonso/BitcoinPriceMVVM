@@ -11,6 +11,8 @@
 		6C113F4F2A254661003B3C14 /* Bitcoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C113F4E2A254661003B3C14 /* Bitcoin.swift */; };
 		6C113F512A25468F003B3C14 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C113F502A25468F003B3C14 /* APIClient.swift */; };
 		6C3BB7962A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */; };
+		6C3BB79D2A31210200754DE4 /* BitcoinViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB79C2A31210200754DE4 /* BitcoinViewModelTests.swift */; };
+		6C3BB79F2A31213F00754DE4 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C3BB79E2A31213F00754DE4 /* APIClientTests.swift */; };
 		6CFA94AC2A251A030009BBF5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AB2A251A030009BBF5 /* AppDelegate.swift */; };
 		6CFA94AE2A251A030009BBF5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AD2A251A030009BBF5 /* SceneDelegate.swift */; };
 		6CFA94B02A251A030009BBF5 /* BitcoinPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CFA94AF2A251A030009BBF5 /* BitcoinPriceViewController.swift */; };
@@ -35,6 +37,8 @@
 		6C113F502A25468F003B3C14 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		6C3BB7932A3119CC00754DE4 /* BitcoinPriceMVVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BitcoinPriceMVVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinPriceViewControllerTests.swift; sourceTree = "<group>"; };
+		6C3BB79C2A31210200754DE4 /* BitcoinViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinViewModelTests.swift; sourceTree = "<group>"; };
+		6C3BB79E2A31213F00754DE4 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		6CFA94A82A251A030009BBF5 /* BitcoinPriceMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BitcoinPriceMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CFA94AB2A251A030009BBF5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6CFA94AD2A251A030009BBF5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				6C3BB7952A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift */,
+				6C3BB79C2A31210200754DE4 /* BitcoinViewModelTests.swift */,
+				6C3BB79E2A31213F00754DE4 /* APIClientTests.swift */,
 			);
 			path = BitcoinPriceMVVMTests;
 			sourceTree = "<group>";
@@ -215,7 +221,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C3BB79F2A31213F00754DE4 /* APIClientTests.swift in Sources */,
 				6C3BB7962A3119CC00754DE4 /* BitcoinPriceViewControllerTests.swift in Sources */,
+				6C3BB79D2A31210200754DE4 /* BitcoinViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
