@@ -140,6 +140,7 @@ class BitcoinPriceViewController: UIViewController {
             DispatchQueue.main.async {
                 self?.labelError.text = errorMessage
                 self?.labelError.isHidden = false
+                self?.activityIndicator.stopAnimating()
             }
         }.store(in: &cancellables)
     }

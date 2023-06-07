@@ -28,7 +28,16 @@ class BitcoinViewModel {
         apiClient.getPriceBitcoin(currency: currency) { [weak self] price, error in
             
             if error != nil {
-                self?.errorMessage = "Error: \(error!.localizedDescription)"
+                DispatchQueue.main.async {
+                    switch error as! NetworkError {
+                    case .badRequest:
+                        self?.errorMessage = "Error, el servidor no responde."
+                    case .badURL:
+                        self?.errorMessage = "Error, la url que intentas acceder no existe."
+                    case .decodingError:
+                        self?.errorMessage = "Error, no pudo decodificar la informacion."
+                    }
+                }
             }
             
             guard let price = price else { return }
@@ -40,7 +49,7 @@ class BitcoinViewModel {
             numberFormatter.maximumFractionDigits = 1
 
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MMM, yy, hh:MM:ss"
+            dateFormatter.dateFormat = "dd MMM, yy, hh:MM"
             
             let dateLastUpdate = dateFormatter.date(from: price.time)
             let date = dateFormatter.string(from: dateLastUpdate ?? Date.now)

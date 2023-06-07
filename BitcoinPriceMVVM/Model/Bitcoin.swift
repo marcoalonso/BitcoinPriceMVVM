@@ -9,6 +9,5 @@ import Foundation
 
 struct BitcoinModel: Codable {
     let time: String
-    let asset_id_quote: String
     let rate: Double
 }
